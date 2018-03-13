@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.data.dao.impl.WheelDaoImpl" >
+
+    <cache/>
+
+    <!-- 查询大转盘数据列表 -->
+    <select id="selectPage" resultType="wheelBase">
+        select
+            a.id AS id,
+            a.shop_id AS shopId,
+            a.title AS title,
+            a.start_date AS startDate,
+            a.end_date AS endDate,
+            a.entry_type AS entryType,
+            a.status AS status,
+            b.name AS name,
+            b.is_chain AS isChain,
+            b.cate AS cate
+        from
+            shop_conf_lottery_basic a left join shop b
+        on a.shop_id = b.id
+            order by field( a.status,'NEW','ON','OFF','DEl') ,a.shop_id
+    </select>
+
+    <!-- 查询大转盘数据列表数目 -->
+    <select id="getCount" resultType="integer">
+        select COUNT(*) from
+          shop_conf_lottery_basic a left join shop b
+        on a.shop_id = b.id
+    </select>
+
+    <!-- 查询参与活动人数 -->
+    <select id="getJoinCount" resultType="integer" parameterType="string">
+        select count(distinct user_id)
+          from lottery_user_prize_record
+        where lottery_id=#{0}
+    </select>
+
+    <!-- 查询参与活动次数 -->
+    <select id="getJoinNum" resultType="integer" parameterType="string">
+        select count(*)
+          from lottery_user_prize_record
+        where lottery_id=#{0}
+    </select>
+
+    <!-- 中奖人数 -->
+    <select id="getLotteryCount" resultType="integer" parameterType="map">
+        select count(*)
+          from lottery_user_prize_record a
+        left join shop_conf_lottery_prize b on a.prize_id = b.id
+          where a.lottery_id=#{id} AND b.prize_type in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 券情况 -->
+    <select id="getLotteryCount" resultType="integer" parameterType="map">
+        SELECT count(*)
+          FROM lottery_user_prize_record a
+        left join user_stock_coupon b
+          on a.stock_id = b.stock_id
+        WHERE b.status in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+          AND a.prize_id in
+            (select id
+            from shop_conf_lottery_prize
+            where lottery_id = #{id} AND prize_type = 'COUPON')
+          AND a.lottery_id = #{id}
+    </select>
+
+</mapper>

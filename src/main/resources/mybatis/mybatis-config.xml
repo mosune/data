@@ -18,4 +18,8 @@
         <setting name="logImpl" value="LOG4J"/>
     </settings>
 
+    <typeAliases>
+        <typeAlias type="com.data.entity.WheelBase" alias="wheelBase" />
+    </typeAliases>
+
 </configuration>

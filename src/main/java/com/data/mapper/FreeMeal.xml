@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.data.dao.impl.FreeMealDaoImpl" >
+
+    <cache />
+
+    <!-- 查询霸王餐数据列表 -->
+    <select id="selectPage" resultType="freeMealBase">
+        select
+          a.id AS id,
+          a.shop_id AS shopId,
+          a.name AS freeMealName,
+          a.start_time AS startTime,
+          a.end_time AS endTime,
+          a.award_time AS awardTime,
+          a.status AS status,
+          a.real_join_no AS realJoinNo,
+          a.award_no AS awardNo,
+          b.name AS shopName,
+          b.is_chain AS isChain,
+          b.cate AS cate
+        from free_meal_config a
+        left join shop b on a.shop_id = b.id order by field( a.status,'NEW','START_JOIN','END_JOIN','START_LOTTERY','END_LOTTERY','OFF') ,a.shop_id
+    </select>
+
+    <!-- 查询秒杀数据列表数目 -->
+    <select id="getCount" resultType="integer">
+        select COUNT(*)
+          from free_meal_config a
+        left join shop b on a.shop_id = b.id
+    </select>
+
+    <!-- 查询秒杀下单列表 -->
+    <select id="getOrderStatus" parameterType="string" resultType="secKillStatus">
+        select
+          order_status AS orderStatus,
+          count(order_status) AS count
+        from sale_order where source_type = 'SECOND_KILL' AND source_id = #{0} group by order_status
+    </select>
+
+    <!-- 查询秒杀下单数量 -->
+    <select id="getOrderCount" parameterType="string" resultType="integer">
+        select count(*) from sale_order where source_id = #{0}
+    </select>
+
+    <!-- 查询商品数量 -->
+    <select id="getOrderCount" parameterType="string" resultType="integer">
+        select count(*) from second_kill_goods where config_id = #{0} AND status = 'VALID'
+    </select>
+
+</mapper>

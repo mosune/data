@@ -22,6 +22,7 @@
         <typeAlias type="com.data.entity.WheelBase" alias="wheelBase" />
         <typeAlias type="com.data.entity.SecKillBase" alias="secKillBase" />
         <typeAlias type="com.data.entity.SecKillStatus" alias="secKillStatus" />
+        <typeAlias type="com.data.entity.FreeMealBase" alias="freeMealBase" />
     </typeAliases>
 
 </configuration>

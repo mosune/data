@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.data.dao.impl.WheelDaoImpl" >
 
-    <cache/>
+    <cache />
 
     <!-- 查询大转盘数据列表 -->
     <select id="selectPage" resultType="wheelBase">
@@ -20,7 +20,7 @@
         from
             shop_conf_lottery_basic a left join shop b
         on a.shop_id = b.id
-            order by field( a.status,'NEW','ON','OFF','DEl') ,a.shop_id
+            order by field(a.status,'NEW','ON','OFF','DEl') ,a.shop_id
     </select>
 
     <!-- 查询大转盘数据列表数目 -->

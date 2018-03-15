@@ -23,6 +23,7 @@
         <typeAlias type="com.data.entity.SecKillBase" alias="secKillBase" />
         <typeAlias type="com.data.entity.SecKillStatus" alias="secKillStatus" />
         <typeAlias type="com.data.entity.FreeMealBase" alias="freeMealBase" />
+        <typeAlias type="com.data.entity.FreeMealStatus" alias="freeMealStatus" />
     </typeAliases>
 
 </configuration>

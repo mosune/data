@@ -2,11 +2,14 @@ package com.data.dao.impl;
 
 import com.data.dao.FreeMealDao;
 import com.data.entity.FreeMealBase;
+import com.data.entity.FreeMealStatus;
 import com.data.entity.SecKillBase;
 import com.data.util.Page;
 import com.data.util.PageParam;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 霸王餐dao的impl
@@ -24,6 +27,21 @@ public class FreeMealDaoImpl extends BaseDaoImpl<FreeMealBase> implements FreeMe
         Integer count = getSqlSession().selectOne(getSqlName("getCount"), pageParam);
         page.setTotal(count == null ? 0 : count);
         return page;
+    }
+
+    @Override
+    public int getAwardPerCount(String id) {
+        return getSqlSession().selectOne(getSqlName("getAwardPerCount"), id);
+    }
+
+    @Override
+    public int getAwardCount(String id) {
+        return getSqlSession().selectOne(getSqlName("getAwardCount"), id);
+    }
+
+    @Override
+    public List<FreeMealStatus> getTicketStatus(String id) {
+        return getSqlSession().selectList(getSqlName("getTicketStatus"), id);
     }
 
 }

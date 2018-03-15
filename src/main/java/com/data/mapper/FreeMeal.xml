@@ -20,32 +20,37 @@
           b.is_chain AS isChain,
           b.cate AS cate
         from free_meal_config a
-        left join shop b on a.shop_id = b.id order by field( a.status,'NEW','START_JOIN','END_JOIN','START_LOTTERY','END_LOTTERY','OFF') ,a.shop_id
+          left join shop b on a.shop_id = b.id order by field( a.status,'NEW','START_JOIN','END_JOIN','START_LOTTERY','END_LOTTERY','OFF') ,a.shop_id
     </select>
 
-    <!-- 查询秒杀数据列表数目 -->
+    <!-- 查询霸王餐数据列表数目 -->
     <select id="getCount" resultType="integer">
         select COUNT(*)
           from free_meal_config a
         left join shop b on a.shop_id = b.id
     </select>
 
-    <!-- 查询秒杀下单列表 -->
-    <select id="getOrderStatus" parameterType="string" resultType="secKillStatus">
+    <!-- 查询霸王餐下单数目 -->
+    <select id="getAwardPerCount" parameterType="string" resultType="integer">
+        select count(*) from free_meal_user where config_id = #{0} and is_award = '1'
+    </select>
+
+    <!-- 查询霸王餐奖品数目 -->
+    <select id="getAwardCount" parameterType="string" resultType="integer">
+        select count(*) from free_meal_award where config_id = #{0}
+    </select>
+
+    <!-- 查询券的状态和数量 -->
+    <select id="getAwardCount" parameterType="string" resultType="integer">
         select
-          order_status AS orderStatus,
-          count(order_status) AS count
-        from sale_order where source_type = 'SECOND_KILL' AND source_id = #{0} group by order_status
-    </select>
-
-    <!-- 查询秒杀下单数量 -->
-    <select id="getOrderCount" parameterType="string" resultType="integer">
-        select count(*) from sale_order where source_id = #{0}
-    </select>
-
-    <!-- 查询商品数量 -->
-    <select id="getOrderCount" parameterType="string" resultType="integer">
-        select count(*) from second_kill_goods where config_id = #{0} AND status = 'VALID'
+          status AS status,
+          count(status) AS
+        from user_stock where product_id =
+          (select b.product_id
+            from free_meal_award a
+          left join coupon b on a.coupon_id = b.id
+            where a.config_id = #{0})
+            and type = 'FREE_MEAL' group by status
     </select>
 
 </mapper>

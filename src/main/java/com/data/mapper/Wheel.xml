@@ -56,7 +56,7 @@
     </select>
 
     <!-- 券情况 -->
-    <select id="getLotteryCount" resultType="integer" parameterType="map">
+    <select id="getTicketCase" resultType="integer" parameterType="map">
         SELECT count(*)
           FROM lottery_user_prize_record a
         left join user_stock_coupon b

@@ -41,7 +41,7 @@
     </select>
 
     <!-- 查询券的状态和数量 -->
-    <select id="getAwardCount" parameterType="string" resultType="integer">
+    <select id="getTicketStatus" parameterType="string" resultType="integer">
         select
           status AS status,
           count(status) AS

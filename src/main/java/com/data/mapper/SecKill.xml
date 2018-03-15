@@ -41,7 +41,7 @@
     </select>
 
     <!-- 查询商品数量 -->
-    <select id="getOrderCount" parameterType="string" resultType="integer">
+    <select id="getShopCount" parameterType="string" resultType="integer">
         select count(*) from second_kill_goods where config_id = #{0} AND status = 'VALID'
     </select>
 

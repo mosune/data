@@ -2,12 +2,15 @@ package com.data.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.data.entity.SecKillBase;
+import com.data.entity.SecKillStatus;
 import com.data.service.SecKillService;
 import com.data.util.Page;
 import com.data.util.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 秒杀
@@ -33,8 +36,26 @@ public class SecKillController {
         PageParam pageParam = new PageParam(offset, limit);
         Page<SecKillBase> page = secKillService.find(pageParam);
         result.put("total", page.getTotal());
+        for (Object o : page.getRows()) {
+            SecKillBase secKillBase = (SecKillBase) o;
+            secKillBase.setShopCount(secKillService.getShopCount(secKillBase.getId()));
+            secKillBase.setBuyShopCount(secKillService.getOrderCount(secKillBase.getId()));
+        }
         result.put("rows", page.getRows());
         return result;
+    }
+
+    /**
+     * 获取状态及数量
+     * @param id
+     * @return
+     */
+    @RequestMapping("getStatus.do")
+    public JSONObject getStatus(String id) {
+        JSONObject result = new JSONObject();
+        List<SecKillStatus> list = secKillService.getOrderStatus(id);
+        result.put("rows", list);
+        return  result;
     }
 
 }

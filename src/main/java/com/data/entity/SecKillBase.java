@@ -40,4 +40,10 @@ public class SecKillBase implements Serializable {
     // 所属行业
     private String cate;
 
+    // 商品总数
+    private int shopCount;
+
+    // 已购买商品总数
+    private int buyShopCount;
+
 }

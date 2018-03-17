@@ -30,6 +30,9 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row">
+                            <div id="toolbar">
+                                <button type="button" class="btn btn-primary btn-sm"><a href="index.jsp" style="color: white;">返回</a></button>
+                            </div>
                             <div class="col-sm-12">
                                 <table class="table table-striped table-bordered table-hover" id="wheelTable">
                                 </table>
@@ -90,6 +93,7 @@
             sortable: true,
             idField: 'id',
             columns: [
+                {field: 'id',width: '10%', title: 'id', align: 'center'},
                 {field: 'shopId',width: '10%', title: '商店id', align: 'center'},
                 {field: 'name',width: '15%', title: '商店名称', align: 'center'},
                 {field: 'isChain', width: '5%', title: '商店类型', align: 'center',

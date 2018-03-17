@@ -45,12 +45,12 @@
         select
           status AS status,
           count(status) AS count
-        from user_stock where product_id =
+        from user_stock where type = 'FREE_MEAL' and rule_id = #{0} and product_id =
           (select b.product_id
             from free_meal_award a
           left join coupon b on a.coupon_id = b.id
             where a.config_id = #{0})
-            and type = 'FREE_MEAL' group by status
+            group by status
     </select>
 
 </mapper>

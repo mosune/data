@@ -30,7 +30,7 @@
         left join shop b on a.shop_id = b.id
     </select>
 
-    <!-- 查询霸王餐下单数目 -->
+    <!-- 查询霸王餐中奖人数 -->
     <select id="getAwardPerCount" parameterType="string" resultType="integer">
         select count(*) from free_meal_user where config_id = #{0} and is_award = '1'
     </select>
@@ -41,10 +41,10 @@
     </select>
 
     <!-- 查询券的状态和数量 -->
-    <select id="getTicketStatus" parameterType="string" resultType="integer">
+    <select id="getTicketStatus" parameterType="string" resultType="freeMealStatus">
         select
           status AS status,
-          count(status) AS
+          count(status) AS count
         from user_stock where product_id =
           (select b.product_id
             from free_meal_award a

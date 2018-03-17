@@ -55,21 +55,31 @@
         </foreach>
     </select>
 
-    <!-- 券情况 -->
-    <select id="getTicketCase" resultType="integer" parameterType="map">
+    <!-- 券使用情况 -->
+    <select id="getTicketUsedCase" resultType="integer" parameterType="string">
         SELECT count(*)
           FROM lottery_user_prize_record a
         left join user_stock_coupon b
           on a.stock_id = b.stock_id
-        WHERE b.status in
-        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-            #{item}
-        </foreach>
+        WHERE b.status in ('LOCKED','PICKED')
           AND a.prize_id in
             (select id
             from shop_conf_lottery_prize
-            where lottery_id = #{id} AND prize_type = 'COUPON')
-          AND a.lottery_id = #{id}
+            where lottery_id = #{0} AND prize_type = 'COUPON')
+          AND a.lottery_id = #{0}
+    </select>
+
+    <!-- 券过期情况 -->
+    <select id="getTicketPastCase" resultType="integer" parameterType="string">
+        SELECT count(*) as expired
+          FROM lottery_user_prize_record a
+        left join user_stock b
+          on a.stock_id = b.id
+        WHERE b.status = 'EXPIRED' AND a.prize_id in
+            (select id
+              from shop_conf_lottery_prize
+            where lottery_id = #{0} AND prize_type = 'COUPON')
+              AND a.lottery_id = #{0}
     </select>
 
 </mapper>

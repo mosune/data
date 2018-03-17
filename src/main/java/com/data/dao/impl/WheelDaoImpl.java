@@ -37,14 +37,6 @@ public class WheelDaoImpl extends BaseDaoImpl<WheelBase> implements WheelDao {
     }
 
     @Override
-    public int getTicketCase(String id, List<String> list) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", id);
-        map.put("list", list);
-        return getSqlSession().selectOne(getSqlName("getTicketCase"), map);
-    }
-
-    @Override
     public int getJoinCount(String id) {
         return getSqlSession().selectOne(getSqlName("getJoinCount"), id);
     }
@@ -52,6 +44,16 @@ public class WheelDaoImpl extends BaseDaoImpl<WheelBase> implements WheelDao {
     @Override
     public int getJoinNum(String id) {
         return getSqlSession().selectOne(getSqlName("getJoinNum"), id);
+    }
+
+    @Override
+    public int getTicketUsedCase(String id) {
+        return getSqlSession().selectOne(getSqlName("getTicketUsedCase"), id);
+    }
+
+    @Override
+    public int getTicketPastCase(String id) {
+        return getSqlSession().selectOne(getSqlName("getTicketPastCase"), id);
     }
 
 }

@@ -29,14 +29,6 @@ public interface WheelService {
     int getLotteryCount(String id, List<String> list);
 
     /**
-     * 券情况
-     * @param id
-     * @param list
-     * @return
-     */
-    int getTicketCase(String id, List<String> list);
-
-    /**
      * 参与活动人数
      * @param id
      * @return
@@ -49,4 +41,18 @@ public interface WheelService {
      * @return
      */
     int getJoinNum(String id);
+
+    /**
+     * 已使用券
+     * @param id
+     * @return
+     */
+    int getTicketUsedCase(String id);
+
+    /**
+     * 已过期券
+     * @param id
+     * @return
+     */
+    int getTicketPastCase(String id);
 }

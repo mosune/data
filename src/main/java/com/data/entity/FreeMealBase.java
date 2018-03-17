@@ -44,10 +44,16 @@ public class FreeMealBase implements Serializable {
     // 所属行业
     private String cate;
 
-    // 实际参加人数
+    // 报名人数
     private int realJoinNo;
 
-    // 中奖人数
+    // 中奖名额
     private int awardNo;
+
+    // 中奖人数
+    private int getAwardNo;
+
+    // 奖品数
+    // private int awardShopNo;
 
 }

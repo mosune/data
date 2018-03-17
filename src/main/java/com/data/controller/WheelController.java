@@ -37,6 +37,18 @@ public class WheelController {
         Page<WheelBase> page = wheelService.find(pageParam);
         result.put("total", page.getTotal());
         result.put("rows", page.getRows());
+        List<String> types = new ArrayList<>(2);
+        for (Object o : page.getRows()) {
+            WheelBase wheelBase = (WheelBase) o;
+            wheelBase.setJoinCount(wheelService.getJoinCount(wheelBase.getId())); // 参与活动人数
+            wheelBase.setJoinNum(wheelService.getJoinNum(wheelBase.getId())); // 参与活动次数
+            wheelBase.setGetLottery(wheelService.getLotteryCount(wheelBase.getId(), getList(types, "COUPON", "CREDIT"))); // 中奖次数
+            wheelBase.setNotGetLottery(wheelService.getLotteryCount(wheelBase.getId(), getList(types, "NONE"))); // 未中奖次数
+            wheelBase.setIntegralLottery(wheelService.getLotteryCount(wheelBase.getId(), getList(types, "CREDIT"))); // 积分中奖次数
+            wheelBase.setTicketLottery(wheelService.getLotteryCount(wheelBase.getId(), getList(types, "COUPON"))); // 券中奖次数
+            // wheelBase.setTicketUsed(wheelService.getTicketUsedCase(wheelBase.getId())); // 已使用券
+            // wheelBase.setTicketPast(wheelService.getTicketPastCase(wheelBase.getId())); // 已过期券
+        }
         return result;
     }
 
@@ -48,15 +60,8 @@ public class WheelController {
     @RequestMapping("getData.do")
     public JSONObject getData(String id) {
         JSONObject result = new JSONObject();
-        List<String> types = new ArrayList<>(2);
-        result.put("getJoinCount", wheelService.getJoinCount(id)); // 参与活动人数
-        result.put("getJoinNum", wheelService.getJoinNum(id)); // 参与活动次数
-        result.put("getLottery" , wheelService.getLotteryCount(id, getList(types, "COUPON", "CREDIT"))); // 中奖次数
-        result.put("notGetLottery" , wheelService.getLotteryCount(id, getList(types, "NONE"))); // 未中奖次数
-        result.put("integralLottery" , wheelService.getLotteryCount(id, getList(types, "CREDIT"))); // 积分中奖次数
-        result.put("ticketLottery" , wheelService.getLotteryCount(id, getList(types, "COUPON"))); // 券中奖次数
-        result.put("ticketUsed" , wheelService.getTicketCase(id, getList(types, "LOCKED", "PICKED"))); // 已使用券
-        result.put("ticketPast" , wheelService.getTicketCase(id, getList(types, "EXPIRED"))); // 已过期券
+        result.put("ticketUsed" , wheelService.getTicketUsedCase(id)); // 已使用券
+        result.put("ticketPast" , wheelService.getTicketPastCase(id)); // 已过期券
         return result;
     }
 

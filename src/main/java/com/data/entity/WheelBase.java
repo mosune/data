@@ -43,4 +43,28 @@ public class WheelBase implements Serializable {
     // 所属行业
     private String cate;
 
+    // 参与人数
+    private int joinCount;
+
+    // 参与次数
+    private int joinNum;
+
+    // 已中奖
+    private int getLottery;
+
+    // 未中奖
+    private int notGetLottery;
+
+    // 积分中奖
+    private int integralLottery;
+
+    // 券中奖
+    private int ticketLottery;
+
+    // 已使用券
+    private int ticketUsed;
+
+    // 已过期券
+    private int ticketPast;
+
 }

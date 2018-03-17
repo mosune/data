@@ -29,14 +29,6 @@ public interface WheelDao {
     int getLotteryCount(String id, List<String> list);
 
     /**
-     * 查询券情况
-     * @param id
-     * @param list
-     * @return
-     */
-    int getTicketCase(String id, List<String> list);
-
-    /**
      * 查询活动参与人数
      * @param id
      * @return
@@ -49,4 +41,18 @@ public interface WheelDao {
      * @return
      */
     int getJoinNum(String id);
+
+    /**
+     * 券使用情况
+     * @param id
+     * @return
+     */
+    int getTicketUsedCase(String id);
+
+    /**
+     * 券过期情况
+     * @param id
+     * @return
+     */
+    int getTicketPastCase(String id);
 }

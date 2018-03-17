@@ -32,11 +32,6 @@ public class WheelServiceImpl implements WheelService {
     }
 
     @Override
-    public int getTicketCase(String id, List<String> list) {
-        return wheelDao.getTicketCase(id, list);
-    }
-
-    @Override
     public int getJoinCount(String id) {
         return wheelDao.getJoinCount(id);
     }
@@ -44,6 +39,16 @@ public class WheelServiceImpl implements WheelService {
     @Override
     public int getJoinNum(String id) {
         return wheelDao.getJoinNum(id);
+    }
+
+    @Override
+    public int getTicketUsedCase(String id) {
+        return wheelDao.getTicketUsedCase(id);
+    }
+
+    @Override
+    public int getTicketPastCase(String id) {
+        return wheelDao.getTicketPastCase(id);
     }
 
 }

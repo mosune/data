@@ -10,8 +10,8 @@
     <title>首页</title>
 </head>
 <body>
-    <a href="wheel.jsp">大转盘<br/></a>
-    <a href="secKill.jsp">秒杀<br/></a>
-    <a href="freeMeal.jsp">霸王餐<br/></a>
+    <a href="wheel.jsp"><h1>大转盘</h1><br/></a>
+    <a href="secKill.jsp"><h1>秒杀</h1><br/></a>
+    <a href="freeMeal.jsp"><h1>霸王餐</h1><br/></a>
 </body>
 </html>

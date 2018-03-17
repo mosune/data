@@ -40,6 +40,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" style="display: none;" data-keyboard="false" data-backdrop="static" id="modal" aria-hidden="true" role="dialog" aria-labelledby="modalHeader">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="myForm" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="used">券已使用：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="used" name="used" type="text" readonly="readonly" required="required" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="dated">券已过期：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="dated" name="dated" type="text" readonly="readonly" required="required" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     var _wheelTable;
@@ -58,16 +90,77 @@
             sortable: true,
             idField: 'id',
             columns: [
-                {field: 'loginName',width: '10%', title: '登录名', align: 'center'},
-                {field: 'password',width: '10%', title: '密码', align: 'center'},
-                {field: 'realName', width: '15%', title: '真实姓名', align: 'center'},
-                {field: 'positionId',width: '10%', title: '职位', align: 'center'},
-                {field: 'remark',width: '10%', title: '备注', align: 'center'},
-                {field: 'flag',width: '10%', title: 'flag', align: 'center'},
-                {field: 'createTime',width: '10%', title: '创建时间', align: 'center'}
+                {field: 'shopId',width: '10%', title: '商店id', align: 'center'},
+                {field: 'name',width: '15%', title: '商店名称', align: 'center'},
+                {field: 'isChain', width: '5%', title: '商店类型', align: 'center',
+                    formatter: function(value){
+                        if(value == 0) return "门店";
+                        else if (value == 1) return "品牌";
+                        else return "-";
+                    }},
+                {field: 'title',width: '15%', title: '大转盘名称', align: 'center'},
+                {field: 'startDate',width: '10%', title: '活动开始时间', align: 'center',
+                    formatter : function(value) {
+                        return $(this).dateFormat(value, 'yyyy-MM-dd HH:mm:ss');
+                    }},
+                {field: 'endDate',width: '10%', title: '活动结束时间', align: 'center',
+                    formatter : function(value) {
+                        return $(this).dateFormat(value, 'yyyy-MM-dd HH:mm:ss');
+                    }},
+                {field: 'entryType',width: '10%', title: '转盘类型', align: 'center',
+                    formatter: function(value){
+                        if(value == 'FLEXIBLE') return "多个转盘";
+                        else if (value == 'STANDARD') return "标准转盘";
+                        else return "其他";
+                    }},
+                {field: 'status',width: '10%', title: '状态', align: 'center',
+                    formatter: function(value){
+                        if(value == 'ON') return "进行中";
+                        else if (value == 'OFF') return "已结束";
+                        else if (value == 'DEL') return "已删除";
+                        else if (value == 'NEW') return "未启用";
+                        else return "其他";
+                    }},
+                {field: 'cate',width: '10%', title: '行业', align: 'center',
+                    formatter: function(value){
+                        if(value == 'BAR') return "酒吧";
+                        else if (value == 'KTV') return "KTV";
+                        else if (value == 'BEAUTY') return "丽人";
+                        else if (value == 'DR') return "餐厅";
+                        else if (value == 'HT') return "酒店";
+                        else if (value == 'FB') return "足浴";
+                        else return "其他";
+                    }},
+                {field: 'joinCount',width: '5%', title: '参与人数', align: 'center'},
+                {field: 'joinNum',width: '5%', title: '参与次数', align: 'center'},
+                {field: 'getLottery',width: '5%', title: '已中奖', align: 'center'},
+                {field: 'notGetLottery',width: '5%', title: '未中奖', align: 'center'},
+                {field: 'integralLottery',width: '5%', title: '积分中奖', align: 'center'},
+                {field: 'ticketLottery',width: '5%', title: '券中奖', align: 'center'},
+                {field: 'ticketUsed',width: '5%', title: '已使用券', align: 'center'},
+                {field: 'ticketPast',width: '5%', title: '已过期券', align: 'center'},
+                {field: 'cate',width: '10%', title: '操作', align: 'center',
+                    formatter: function(value, row){
+                        return '<button type="button" class="btn btn-info btn-xs" onclick="openModel(\''+row.id+'\')">查看</button>';
+                    }}
             ],
             toolbar: '#toolbar'
         });
     });
+
+    function openModel(id) {
+        $("#modal").modal("show");
+        $.ajax({
+            type: 'post',
+            url: '<%=root%>/wheel/getData.do',
+            data: {id:id},
+            dataType: 'json',
+            async:false,
+            success: function(data){
+                $("#used").val(data.ticketUsed);
+                $("#dated").val(data.ticketPast);
+            }
+        });
+    }
 </script>
 </html>

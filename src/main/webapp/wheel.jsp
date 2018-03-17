@@ -141,8 +141,6 @@
                 {field: 'notGetLottery',width: '5%', title: '未中奖', align: 'center'},
                 {field: 'integralLottery',width: '5%', title: '积分中奖', align: 'center'},
                 {field: 'ticketLottery',width: '5%', title: '券中奖', align: 'center'},
-                {field: 'ticketUsed',width: '5%', title: '已使用券', align: 'center'},
-                {field: 'ticketPast',width: '5%', title: '已过期券', align: 'center'},
                 {field: 'cate',width: '10%', title: '操作', align: 'center',
                     formatter: function(value, row){
                         return '<button type="button" class="btn btn-info btn-xs" onclick="openModel(\''+row.id+'\')">查看</button>';

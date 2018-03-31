@@ -46,4 +46,7 @@ public class SecKillBase implements Serializable {
     // 已购买商品总数
     private int buyShopCount;
 
+    // 创建时间
+    private Date createTime;
+
 }

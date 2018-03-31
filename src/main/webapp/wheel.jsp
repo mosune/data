@@ -94,15 +94,19 @@
             idField: 'id',
             columns: [
                 {field: 'id',width: '10%', title: 'id', align: 'center'},
-                {field: 'shopId',width: '10%', title: '商店id', align: 'center'},
-                {field: 'name',width: '15%', title: '商店名称', align: 'center'},
-                {field: 'isChain', width: '5%', title: '商店类型', align: 'center',
+                {field: 'shopId',width: '10%', title: '门店id', align: 'center'},
+                {field: 'name',width: '15%', title: '门店名称', align: 'center'},
+                {field: 'isChain', width: '5%', title: '门店类型', align: 'center',
                     formatter: function(value){
                         if(value == 0) return "门店";
                         else if (value == 1) return "品牌";
                         else return "-";
                     }},
                 {field: 'title',width: '15%', title: '大转盘名称', align: 'center'},
+                {field: 'createTime',width: '10%', title: '创建时间', align: 'center',
+                    formatter : function(value) {
+                        return $(this).dateFormat(value, 'yyyy-MM-dd HH:mm:ss');
+                    }},
                 {field: 'startDate',width: '10%', title: '活动开始时间', align: 'center',
                     formatter : function(value) {
                         return $(this).dateFormat(value, 'yyyy-MM-dd HH:mm:ss');

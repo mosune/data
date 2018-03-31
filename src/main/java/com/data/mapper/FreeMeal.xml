@@ -16,11 +16,13 @@
           a.status AS status,
           a.real_join_no AS realJoinNo,
           a.award_no AS awardNo,
+          a.create_time AS createTime,
           b.name AS shopName,
           b.is_chain AS isChain,
           b.cate AS cate
         from free_meal_config a
-          left join shop b on a.shop_id = b.id order by field( a.status,'NEW','START_JOIN','END_JOIN','START_LOTTERY','END_LOTTERY','OFF') ,a.shop_id
+          left join shop b on a.shop_id = b.id order by a.create_time desc, field( a.status,'NEW','START_JOIN','END_JOIN','START_LOTTERY','END_LOTTERY','OFF')
+          <!--order by field( a.status,'NEW','START_JOIN','END_JOIN','START_LOTTERY','END_LOTTERY','OFF') ,a.shop_id -->
     </select>
 
     <!-- 查询霸王餐数据列表数目 -->

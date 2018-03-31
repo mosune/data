@@ -67,4 +67,7 @@ public class WheelBase implements Serializable {
     // 已过期券
     private int ticketPast;
 
+    // 创建时间
+    private Date createTime;
+
 }

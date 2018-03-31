@@ -53,6 +53,9 @@ public class FreeMealBase implements Serializable {
     // 中奖人数
     private int getAwardNo;
 
+    // 创建时间
+    private Date createTime;
+
     // 奖品数
     // private int awardShopNo;
 

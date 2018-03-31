@@ -14,13 +14,15 @@
             a.end_date AS endDate,
             a.entry_type AS entryType,
             a.status AS status,
+            a.create_time AS createTime,
             b.name AS name,
             b.is_chain AS isChain,
             b.cate AS cate
         from
             shop_conf_lottery_basic a left join shop b
         on a.shop_id = b.id
-            order by field(a.status,'NEW','ON','OFF','DEl') ,a.shop_id
+          order by a.create_time desc, field(a.status,'NEW','ON','OFF','DEl')
+            <!--order by field(a.status,'NEW','ON','OFF','DEl') ,a.shop_id-->
     </select>
 
     <!-- 查询大转盘数据列表数目 -->

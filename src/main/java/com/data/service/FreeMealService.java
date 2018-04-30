@@ -42,4 +42,6 @@ public interface FreeMealService {
      */
     List<FreeMealStatus> getTicketStatus(String id);
 
+    int getTrue(String id);
+
 }

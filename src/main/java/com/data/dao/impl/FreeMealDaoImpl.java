@@ -44,4 +44,9 @@ public class FreeMealDaoImpl extends BaseDaoImpl<FreeMealBase> implements FreeMe
         return getSqlSession().selectList(getSqlName("getTicketStatus"), id);
     }
 
+    @Override
+    public int getTrue(String id) {
+        return getSqlSession().selectOne(getSqlName("getTrue"), id);
+    }
+
 }

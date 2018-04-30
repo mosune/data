@@ -41,4 +41,5 @@ public interface SecKillDao {
      * @return
      */
     int getShopCount(String id);
+
 }

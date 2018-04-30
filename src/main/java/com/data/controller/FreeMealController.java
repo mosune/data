@@ -39,6 +39,7 @@ public class FreeMealController {
         for (Object o : page.getRows()) {
             FreeMealBase freeMealBase = (FreeMealBase) o;
             freeMealBase.setGetAwardNo(freeMealService.getAwardPerCount(freeMealBase.getId())); // 中奖人数
+            freeMealBase.setRealJoinNo(freeMealService.getTrue(freeMealBase.getId()));
             // freeMealBase.setAwardShopNo(freeMealService.getAwardCount(freeMealBase.getId())); // 奖品数
         }
         result.put("rows", page.getRows());

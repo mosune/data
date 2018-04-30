@@ -43,4 +43,8 @@ public class FreeMealServiceImpl implements FreeMealService {
         return freeMealDao.getTicketStatus(id);
     }
 
+    @Override
+    public int getTrue(String id) {
+        return freeMealDao.getTrue(id);
+    }
 }

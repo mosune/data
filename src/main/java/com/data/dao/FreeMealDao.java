@@ -42,4 +42,6 @@ public interface FreeMealDao {
      * @return
      */
     List<FreeMealStatus> getTicketStatus(String id);
+
+    int getTrue(String id);
 }

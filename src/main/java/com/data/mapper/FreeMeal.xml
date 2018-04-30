@@ -14,7 +14,6 @@
           a.end_time AS endTime,
           a.award_time AS awardTime,
           a.status AS status,
-          a.real_join_no AS realJoinNo,
           a.award_no AS awardNo,
           a.create_time AS createTime,
           b.name AS shopName,
@@ -53,6 +52,10 @@
           left join coupon b on a.coupon_id = b.id
             where a.config_id = #{0})
             group by status
+    </select>
+
+    <select id="getTrue" parameterType="string" resultType="integer">
+        select count(*) from free_meal_user where config_id = #{0}
     </select>
 
 </mapper>

@@ -101,6 +101,10 @@
                     formatter : function(value) {
                         return $(this).dateFormat(value, 'yyyy-MM-dd HH:mm:ss');
                     }},
+                {field: 'awardTime',width: '10%', title: '开奖时间', align: 'center',
+                    formatter : function(value) {
+                        return $(this).dateFormat(value, 'yyyy-MM-dd HH:mm:ss');
+                    }},
                 {field: 'status',width: '10%', title: '活动状态', align: 'center',
                     formatter: function(value){
                         if(value == 'START_LOTTERY') return "开始抽奖";
